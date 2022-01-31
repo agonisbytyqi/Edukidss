@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "C:\\Users\\BesiService\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\BesiService\\.nuget\\packages"
+    ]
+  }
+}

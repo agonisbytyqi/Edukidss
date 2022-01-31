@@ -1,0 +1,83 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using leave_management.Data
+@inject SignInManager<Employee> SignInManager
+@inject UserManager<Employee> UserManager
+
+@model IEnumerable<leave_management.Models.HomeWork>
+
+@{ ViewData["Title"] = "Index";
+                Layout = "~/Views/Shared/_AdminLTE.cshtml"; }
+<h1>Homeworks</h1>
+@if (SignInManager.IsSignedIn(User) && User.IsInRole("Teacher"))
+{
+<a class="btn btn-outline-success" asp-action="Create">
+    <i class="fa fa-plus"></i> Create new
+</a>
+                <br />
+                                <br />}
+@if (SignInManager.IsSignedIn(User) && User.IsInRole("Administrator"))
+{
+<a class="btn btn-outline-success" asp-action="Create">
+    <i class="fa fa-plus"></i> Create new
+</a>
+                <br />
+                                <br />}
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NameOfHomeWork)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateOfPublication)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Deadline)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NameOfHomeWork)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOfPublication)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Deadline)
+            </td>
+            @if (SignInManager.IsSignedIn(User) && User.IsInRole("Administrator"))
+            {
+        <td>
+            <a class="btn btn-outline-success" asp-action="Details" asp-route-id="@item.ID">
+                <i class="fa fa-search"></i> Details
+            </a>
+            <a class="btn btn-outline-success" asp-action="Details" asp-route-id="@item.ID">
+                <i class="fa fa-edit"></i> Edit
+            </a>
+            <a class="btn btn-outline-success" asp-action="Delete" asp-route-id="@item.ID">
+                <i class="fa fa-trash"></i> Delete
+            </a>
+        </td>
+}
+            @if (SignInManager.IsSignedIn(User) && User.IsInRole("Teacher"))
+            {
+        <td>
+            <a class="btn btn-outline-success" asp-action="Details" asp-route-id="@item.ID">
+                <i class="fa fa-search"></i> Details
+            </a>
+            <a class="btn btn-outline-success" asp-action="Details" asp-route-id="@item.ID">
+                <i class="fa fa-edit"></i> Edit
+            </a>
+            <a class="btn btn-outline-success" asp-action="Delete" asp-route-id="@item.ID">
+                <i class="fa fa-trash"></i> Delete
+            </a>
+        </td>
+}
+        </tr>}
+    </tbody>
+</table>
